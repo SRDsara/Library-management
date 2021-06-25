@@ -27,6 +27,7 @@ public class KidsAndTeens extends Book {
     }
 
     public void upBo() {
+        try{
         System.out.print("New Name: ");
         String nname = sc.nextLine();
         if (nname.isEmpty()) {
@@ -87,6 +88,11 @@ public class KidsAndTeens extends Book {
         this.setCallNum(nwr,nyear);
         System.out.println("book number " + (this.getCode()) + " is updated and the new call number is:"+this.getCallNum());
     }
+    catch(Exception e){
+        System.out.println("enter year correctly");
+    }
+    }
+    
     //show appropriate book for the given age
     public static int showApprBook(KidsAndTeens [] k,short age){
         int ans=-1;
@@ -171,6 +177,7 @@ public class KidsAndTeens extends Book {
                     else{ System.out.println("wrong choise!");}
                 }  
             }
+            try{
             System.out.println("now choose your favorite book");
             int f=sc.nextInt();
             for(int i=0; i<k.length; i++){
@@ -180,6 +187,11 @@ public class KidsAndTeens extends Book {
                     }
                 }
             }
+        }
+        catch(Exception e){
+            System.out.println("enter number correctly");
+            sc.next();
+        }
 
     return ans;
     }

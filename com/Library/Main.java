@@ -40,34 +40,48 @@ public class Main {
             System.out.println("19-show the members who borrowed the book your considering");
             System.out.println("Choose one to continue... ");
             System.out.println("--------------------------------------------");
-            int c = sc.nextInt();
-            sc.nextLine();
+            int c=0;
+            try{c = sc.nextInt();}
+            catch(Exception e){System.out.println("invalid type,enter a number!");}
+            sc.nextLine();            
             switch (c) {
 
                 //create member
                 case 1:
                         Member m=Member.createMem();
+                        try{
                         if (numMem < maxMem) {
-                        members[numMem] = m;
-                        numMem++;
-                        System.out.println("member's id=" + (m.getid()));
-                    } else {
-                        System.out.println("member's storage is Full! ");
-                    }
+                            members[numMem] = m;
+                            numMem++;
+                            System.out.println("member's id=" + (m.getid()));
+                            } else {
+                                System.out.println("member's storage is Full! ");
+                            }
+                        }
+                        catch(Exception e){
+                            System.out.println("member did not created, try again later");                           
+                        }
                     break;
                 //read member's info
                 case 2:
                     System.out.println("member's id: ");
-                    long id0 = sc.nextLong();
+                    try{
+                    long id0 = sc.nextLong();                    
                     int a0 = Member.searchMem(id0, members);
                     if (a0 != -1) {
                         members[a0].readMem(id0);
                     } else {
                         System.out.println("this member dose not exists!!");
                     }
+                    }
+                    catch(Exception e){
+                        System.out.println("enter id correctly!!");
+                        sc.next();
+                    }
                     break;
                 //update member's info
                 case 3:
+                    try{
                     System.out.println("member's id: ");
                     long id1 = sc.nextLong();
                     int a1 = Member.searchMem(id1, members);
@@ -76,9 +90,15 @@ public class Main {
                     } else {
                         System.out.println("this member dose not exists!!");
                     }
+                    }
+                    catch(Exception e){
+                        System.out.println("enter id correctly!!");
+                        sc.next();
+                    }
                     break;
                 //delete member
                 case 4:
+                    try{
                     System.out.println("id: ");
                     long id2 = sc.nextLong();
                     int a2 = Member.searchMem(id2, members);
@@ -88,17 +108,28 @@ public class Main {
                     } else {
                         System.out.println("this member dose not exists!!");
                     }
+                    }
+                    catch(Exception e){
+                        System.out.println("enter id correctly!!");
+                        sc.next();
+                    }
                     break;
                 //search member
                 case 5:
+                try{
                     System.out.println("member's id: ");
                     long id3 = sc.nextLong();
                     System.out.println(Member.searchMem(id3, members));
+                    }
+                    catch(Exception e){
+                        System.out.println("enter id correctly!!");
+                        sc.next();
+                    }
                     break;
                 //search member's id
                 case 6:
                     System.out.println("Enter the name(or part of that): ");
-                    sc.nextLine();
+                    //sc.nextLine();
                     String name1 = sc.nextLine();
                     Member.searchMemID(name1, members);
                     break;
@@ -107,7 +138,8 @@ public class Main {
                     Member.showInfMem(members);
                     break;
                 //create new book
-                case 8:                    
+                case 8:
+                    try{                    
                     System.out.println("Name: ");
                     String name2 = sc.nextLine();
                     System.out.println("Writer: ");
@@ -180,7 +212,11 @@ public class Main {
                             System.out.println("book's storage is Full! ");
                         }
                     }
-
+                    }
+                    catch(Exception e){
+                        System.out.println("enter year correctly!!");
+                        sc.next();
+                    }
                     break;
                 // reading book's info
                 case 9:                    
@@ -217,9 +253,9 @@ public class Main {
                         break;
                         //searching book's info
                     case 12:
-                    System.out.println("book's call number: ");
-                    String id4 = sc.next();
-                    System.out.println(Book.searchBo(id4, books));
+                        System.out.println("book's call number: ");
+                        String id4 = sc.next();
+                        System.out.println(Book.searchBo(id4, books));
                         break;
                     //enter name or part of it and search for call number
                     case 13:
@@ -233,6 +269,7 @@ public class Main {
                         break;
                     //lend book
                     case 15:
+                    try{
                         System.out.println("which member? enter id: ");
                         long ida = sc.nextLong();
                         int idb = Member.searchMem(ida, members);
@@ -284,9 +321,15 @@ public class Main {
                                    }
                         } else { System.out.println("wrong id or wrong call number!!");
                             }
+                        }
+                        catch(Exception e){
+                            System.out.println("enter id correctly!!");
+                            sc.next();
+                        }
                         break;
                     //show the books which are borrowed by member
                     case 16:
+                        try{
                         System.out.println("which member? enter id: ");
                         long id6 = sc.nextLong();
                         int id7 = Member.searchMem(id6, members);
@@ -295,9 +338,15 @@ public class Main {
                         } else {
                             System.out.println("this member dose not exists!!");
                         }
+                        }
+                        catch(Exception e){
+                            System.out.println("enter id correctly!!");
+                            sc.next();
+                        }
                         break;
                     //lend books to kids and teenagers   
                     case 17:
+                        try{
                         System.out.println("which member? enter id: ");
                         long idc = sc.nextLong();
                         int idd = Member.searchMem(idc, members);
@@ -320,10 +369,16 @@ public class Main {
                             }
                         }
                         }else{System.out.println("sorry ! your age is out of limitation!!"); }
-                        }  
+                        } 
+                        }
+                        catch(Exception e){
+                            System.out.println("enter parameters correctly!!");
+                            sc.next();
+                        }
                         break;
                     //take back a book
                     case 18:
+                        try{
                         System.out.println("which member? enter id: ");
                         long id9 = sc.nextLong();
                         int id8 = Member.searchMem(id9, members);
@@ -341,8 +396,13 @@ public class Main {
                         } else {
                             System.out.println("wrong choise,try again");
                         }
+                        }
+                        catch(Exception e){
+                            System.out.println("enter id correctly!!");
+                            sc.next(); 
+                        }
                         break;
-
+                    //printing list of members who borrowed your fav book
                     case 19:
                         System.out.println("which book do you consider? enter call number: ");
                         String callNumbb = sc.next();
@@ -352,6 +412,9 @@ public class Main {
                                 System.out.println(books[callnum].whoBorrowed[i].getName());
                             }
                         }
+                    default:
+                        break;
+                    
                 }
             }
         }

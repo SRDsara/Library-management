@@ -81,9 +81,10 @@ public class Member {
 
     //create new member and add to member's list
     public static Member createMem(){
+        try{
         System.out.println("Name: ");
         String name0 = sc.nextLine();
-        ////////////?????????????????????????ystem.out.println("Age: ");
+        
         System.out.println("Age: ");
         short xage = sc.nextShort();
 
@@ -105,8 +106,13 @@ public class Member {
         String phoneNumber = sc.nextLine();
 
         Member m = new Member(name0, age, sex, phoneNumber);
-
         return m;
+        }
+        catch(Exception e){
+            System.out.println("invalid type,try again ");
+        }
+        return null;
+        
     }
 
     //showing member's information by getting id
@@ -133,14 +139,15 @@ public class Member {
 
     // updating member's info
     public void upMem() {
-            sc.nextLine();
-            System.out.print("New Name: ");
+            //sc.nextLine();
+        try{
+            System.out.println("New Name: ");
             String nname = sc.nextLine();
             if (nname.isEmpty()) {
                 nname = this.getName();
             }
-
-            System.out.print("New Age: ");
+            
+            System.out.println("New Age: ");
             String nxage = "";
             nxage = sc.nextLine();
             short nage;
@@ -154,7 +161,7 @@ public class Member {
                 nage = Short.valueOf(nxage);
             }
 
-            System.out.print("New Sex(f/m): ");
+            System.out.println("New Sex(f/m): ");
             String nxsex = sc.nextLine();
             char nsex;
             if (nxsex.isEmpty()) {
@@ -167,7 +174,7 @@ public class Member {
                 nsex = nxsex.charAt(0);
             }
 
-            System.out.print("New Phone number: ");
+            System.out.println("New Phone number: ");
             String nphoneNumber = sc.nextLine();
             if (nphoneNumber.isEmpty()) {
                 nphoneNumber = this.getPhoneNumber();
@@ -177,6 +184,11 @@ public class Member {
             this.setSex(nsex);
             this.setPhoneNumber(nphoneNumber);
             System.out.println("member number " + (this.getid()-1000000) + " is updated!");
+        }
+        catch(Exception e){
+            System.out.println("enter age correctly!!");
+            
+        }
 
     }
 
@@ -196,23 +208,29 @@ public class Member {
             //else
         }
         if(c>0){
-        System.out.println("which one do you mean? Enter the number: ");
-        int num = sc.nextInt();
-        if(num<=c){
-        for (int i = 0; i < m.length - 1; i++) {
-            if (i == num - 1) {
-                System.out.println("* member number " + (num) + " *");
-                System.out.println("member's id=           " + m[num-1].getid());
-                System.out.println("member's name=         " + m[num-1].getName());
-                System.out.println("member's age=          " + m[num-1].getAge());
-                System.out.println("member's sex=          " + m[num-1].getSex());
-                System.out.println("member's phone number= " + m[num-1].getPhoneNumber());
+            try{
+            System.out.println("which one do you mean? Enter the number: ");
+            int num = sc.nextInt();
+            if(num<=c){
+                for (int i = 0; i < m.length - 1; i++) {
+                    if (i == num - 1) {
+                        System.out.println("* member number " + (num) + " *");
+                        System.out.println("member's id=           " + m[num-1].getid());
+                        System.out.println("member's name=         " + m[num-1].getName());
+                        System.out.println("member's age=          " + m[num-1].getAge());
+                        System.out.println("member's sex=          " + m[num-1].getSex());
+                        System.out.println("member's phone number= " + m[num-1].getPhoneNumber());
+                    }
                 }
-            }
         }else{System.out.println("invalid choise");}
-        
+    }
+    catch(Exception e){
+        System.out.println("enter number correctly!!");
+        sc.next();
+    }
     }else{ System.out.println("nothing found!!");}
     }
+
 
     //showing member's info by getting the member array
     public static void showInfMem(Member[] members) {

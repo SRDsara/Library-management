@@ -121,14 +121,9 @@ public class Book {
         System.out.println("book's year=         " + this.getYear());
 
     }
-
-    public void editCallNum(int code){
-        String ncall=getCallNum().substring(4);
-        ncall=String.valueOf(code)+ncall;
-        this.callNum=ncall;
-    }
     //updating book's info
     public void upBo(int indx) {
+        try{
         System.out.print("New Name: ");
         String nname = sc.nextLine();
         if (nname.isEmpty()) {
@@ -152,7 +147,7 @@ public class Book {
         if (npb.isEmpty()) {
             npb = this.getPublisher();
         }
-
+        
         System.out.print("New Year: ");
         String nxyear = "";
         nxyear = sc.nextLine();
@@ -166,7 +161,7 @@ public class Book {
             }
             nyear = Integer.valueOf(nxyear);
         }
-
+       
 
         System.out.print("New genre: ");
         String nxgn = sc.nextLine();
@@ -188,8 +183,11 @@ public class Book {
             this.setYear(nyear);
             this.setCallNum(nwr,nyear);
             System.out.println("book number " + (this.code) + " is updated and the new call number is:"+this.getCallNum());
+            }
+        catch(Exception e){
+            System.out.println("enter year correctly");
         }
-    
+    }
     //deleting member by getting index (index by search method)
     public static void delBo(int a, Book[] b) {
         if (b == null) {
@@ -236,6 +234,7 @@ public class Book {
         }
         if(c>0) {
             System.out.println("which one do you mean? Enter the number: ");
+            try{
             int num = sc.nextInt();
             if(num<=c && num>=1){
             for (int i = 0; i < b.length - 1; i++) {
@@ -251,7 +250,9 @@ public class Book {
                     }
                 }
             }else{System.out.println("invalid choise!"); }
-
+        }catch(Exception e){
+            System.out.println("enter year correctly");
+        }
         }else{System.out.println("nothing found!");}
     }
     //add a member who borrowed this book to the list

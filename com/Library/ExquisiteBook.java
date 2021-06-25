@@ -21,6 +21,7 @@ public class ExquisiteBook extends Book{
     }
 
     public void upBo() {
+        try{
         System.out.print("New Name: ");
         String nname = sc.nextLine();
         if (nname.isEmpty()) {
@@ -82,6 +83,10 @@ public class ExquisiteBook extends Book{
         this.setCallNum(nwr,nyear);
         System.out.println("book number " + (this.getCode()) + " is updated and the new call number is:"+this.getCallNum());
     }
-
+    catch(Exception e){
+        System.out.println("enter year correctly");
+    }
+    }
+    
 
 }
