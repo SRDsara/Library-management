@@ -37,6 +37,7 @@ public class Main {
             System.out.println("16-show member's borrowed book");
             System.out.println("17-lend special books to children and teenagers");
             System.out.println("18-remove book from borrowed list");
+            System.out.println("19-show the members who borrowed the book your considering");
             System.out.println("Choose one to continue... ");
             System.out.println("--------------------------------------------");
             int c = sc.nextInt();
@@ -247,12 +248,13 @@ public class Main {
                                     if (books[callNum1].getExistance() == true) {
 
                                         boolean x1 = members[idb].borrow(books[callNum1]);
-                                        if (x1 == true) {
+                                        boolean x2=books[callNum1].perBoro(members[idb]);
+                                        if (x1 == true && x2== true) {
 
                                             books[callNum1].setExistance(false);
                                             System.out.println("book " + books[callNum1].getCallNum() + " is borrowed by " + members[idb].getid());
 
-                                        } else { System.out.println("you can not borrow more than 5 books!!");
+                                        } else { System.out.println("you can not borrow more than 5 books!! OR library's storage is full");
                                             }
                                         } else {System.out.println("this book is not available");
                                             }
@@ -264,12 +266,13 @@ public class Main {
                                         if (books[callNum1].getExistance() == true) {
 
                                             boolean x1 = members[idb].borrow(books[callNum1]);
-                                            if (x1 == true) {
+                                            boolean x2=books[callNum1].perBoro(members[idb]);
+                                            if (x1 == true && x2==true) {
     
                                                 books[callNum1].setExistance(false);
                                                 System.out.println("book " + books[callNum1].getCallNum() + " is borrowed by " + members[idb].getid());
     
-                                            } else { System.out.println("you can not borrow more than 5 books!!");
+                                            } else { System.out.println("you can not borrow more than 5 books!! OR library's storage is full");
                                                 }
                                         } else {System.out.println("this book is not available");
                                             }
@@ -304,12 +307,13 @@ public class Main {
                             int a=KidsAndTeens.showApprBook(katbooks, age0);
                             if(a>-1){
                             if (books[a].getExistance() == true) {
-                                boolean x2 = members[idd].borrow(books[a]);
-                                if (x2 == true) {
+                                boolean x3 = members[idd].borrow(books[a]);
+                                boolean x4=books[a].perBoro(members[idd]);
+                                if (x3 == true && x4==true) {
                                     books[a].setExistance(false);
                                     System.out.println("book " + books[a].getCallNum() + " is borrowed by " + members[idd].getid());
                                 } else {
-                                    System.out.println("you can not borrow more than 5 books!!");
+                                    System.out.println("you can not borrow more than 5 books!! OR library's storage is full");
                                 }
                             } else {
                                 System.out.println("this book is not available");
@@ -338,6 +342,16 @@ public class Main {
                             System.out.println("wrong choise,try again");
                         }
                         break;
+
+                    case 19:
+                        System.out.println("which book do you consider? enter call number: ");
+                        String callNumbb = sc.next();
+                        int callnum = Book.searchBo(callNumbb, books);
+                        for(int i=0;i<10000000;i++){
+                            if(books[callnum].whoBorrowed[i]!= null){
+                                System.out.println(books[callnum].whoBorrowed[i].getName());
+                            }
+                        }
                 }
             }
         }

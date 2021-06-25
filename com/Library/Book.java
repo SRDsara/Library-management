@@ -13,6 +13,7 @@ public class Book {
     private String callNum;
     private boolean existance=true;
     private String genre;
+    Member[] whoBorrowed=new Member[10000000];
     static Scanner sc = new Scanner(System.in);
 
     //constructor
@@ -252,5 +253,15 @@ public class Book {
             }else{System.out.println("invalid choise!"); }
 
         }else{System.out.println("nothing found!");}
+    }
+    //add a member who borrowed this book to the list
+    public boolean perBoro(Member m) {
+        for (int i = 0; i <10000000 ; i++) {
+                if (this.whoBorrowed[i] == null) {
+                    whoBorrowed[i]=m;
+                    return true;
+                }
+        }
+        return false;
     }
 }
