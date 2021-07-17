@@ -1,31 +1,36 @@
 package com.library;
 
-import java.util.Scanner;
+import java.util.*;
 
+/** 
+ * @see com.library.Main
+ * @see com.library.Book
+ * @see com.library.ExquisiteBook
+ * @see com.library.KidsAndTeens
+ */
+ 
 public class Member {
     private long id;
     private static int counter = 0;
     private String name;
     private short age;
     private char sex;
-    private String phoneNumber;
-    //private static final int maxMem = 1_000_000;
-    private Book[] borrowed = new Book[5];
-    //int numMem=0;
+    private String phoneNumber;   
+    private Book[] borrowed = new Book[5];  
     static Scanner sc = new Scanner(System.in);
 
-    //constructor
+    /** constructor */
     public Member(String name, short age, char sex, String PhoneNumber) {
         setName(name);
         setAge(age);
         setSex(sex);
         setPhoneNumber(PhoneNumber);
-        id = counter++;//+1??
+        id = counter++;
         setid();
 
     }
 
-    //setters
+    /** setters */
     public void setName(String name) {
         this.name = name;
     }
@@ -46,7 +51,7 @@ public class Member {
         this.id += 1000001;
     }
 
-    //getters
+    /** getters */
     public String getName() {
         return this.name;
     }
@@ -67,55 +72,54 @@ public class Member {
         return this.id;
     }
 
-    //the index of member in array is returned by getting id
+    /**the index of member in array is returned by getting id */
     public static int searchMem(long id, Member[] m) {
-        for (int i = 0; i < m.length; i++) {
-            if (m[i] != null) {
-                if (id == m[i].getid()) {
-                    return i;
-                }
-            }
+        for (int i = 0; i < m.length; i++) {            
+            if (m[i]!= null && id == m[i].getid()) {
+                return i;
+            }            
         }
+        
         return -1;
     }
 
-    //create new member and add to member's list
+    /** create new member and add to member's list */
     public static Member createMem(){
         try{
-        System.out.println("Name: ");
-        String name0 = sc.nextLine();
+            System.out.println("Name: ");
+            String name0 = sc.nextLine();
         
-        System.out.println("Age: ");
-        short xage = sc.nextShort();
+            System.out.println("Age: ");
+            short xage = sc.nextShort();
 
-        while (xage < 0 || xage > 100) {
-            System.out.println("invalid , try again:  ");
-            xage = sc.nextShort();
-            }
-        short age = xage;
-        System.out.println("Sex(f/m): ");
-        char xsex = sc.next().charAt(0);
+            while (xage < 0 || xage > 100) {
+                System.out.println("invalid , try again:  ");
+                xage = sc.nextShort();
+                }
+            short age = xage;
+            System.out.println("Sex(f/m): ");
+            char xsex = sc.next().charAt(0);
 
-        while (xsex != 'f' && xsex != 'm' && xsex != 'F' && xsex != 'M') {
-            System.out.println("invalid , try again:  ");
-            xsex = sc.next().charAt(0);
-            }
-        char sex = xsex;
-        sc.nextLine();
-        System.out.println("Phone number: ");
-        String phoneNumber = sc.nextLine();
+            while (xsex != 'f' && xsex != 'm' && xsex != 'F' && xsex != 'M') {
+                System.out.println("invalid , try again:  ");
+                xsex = sc.next().charAt(0);
+                }
+            char sex = xsex;
+            sc.nextLine();
+            System.out.println("Phone number: ");
+            String phoneNumber = sc.nextLine();
 
-        Member m = new Member(name0, age, sex, phoneNumber);
-        return m;
+            Member m = new Member(name0, age, sex, phoneNumber);
+            return m;
         }
-        catch(Exception e){
-            System.out.println("invalid type,try again ");
+        catch(InputMismatchException e){
+            sc.nextLine();
         }
         return null;
         
     }
 
-    //showing member's information by getting id
+    /** showing member's information by getting id*/
     public void readMem(long id) {
         System.out.println("* member number " +(this.getid()-1000000)  + " *");
         System.out.println("member's id=           " + this.getid());
@@ -125,7 +129,7 @@ public class Member {
         System.out.println("member's phone number= " + this.getPhoneNumber());
     }
 
-    //deleting member by getting index (index by search method)
+    /**deleting member by getting index (index by search method)*/
     public static void delMem(int a, Member[] m) {
         if (m == null) {
             System.out.println("non-existing member!!");
@@ -137,7 +141,7 @@ public class Member {
         }
     }
 
-    // updating member's info
+    /** updating member's info */
     public void upMem() {
             //sc.nextLine();
         try{
@@ -185,79 +189,65 @@ public class Member {
             this.setPhoneNumber(nphoneNumber);
             System.out.println("member number " + (this.getid()-1000000) + " is updated!");
         }
-        catch(Exception e){
+        catch(NumberFormatException e){
             System.out.println("enter age correctly!!");
             
         }
 
     }
 
-    //searching member'id by getting name
+    /** searching member'id by getting name */
     public static void searchMemID(String a, Member[] m) {
-        int c=0;
-        for (int i = 0; i < m.length - 1; i++) {
-            if (m[i] != null &&  m[i].getName().contains(a)) {
-                System.out.println("* member number " + (i + 1) + " *");
-                System.out.println("member's name=         " + m[i].getName());
-                System.out.println("member's age=          " + m[i].getAge());
-                System.out.println("member's sex=          " + m[i].getSex());
-                System.out.println("member's phone number= " + m[i].getPhoneNumber());
-                System.out.println("---------------------------------------------------");
-                c++;
+        try{
+            int c=0;
+            for (int i = 0; i < m.length - 1; i++) {
+                if ( (m[i] != null) && m[i].getName().contains(a)) {
+                    System.out.println("* member number " + (i + 1) + " *");
+                    System.out.println("member's name=         " + m[i].getName());
+                    System.out.println("member's age=          " + m[i].getAge());
+                    System.out.println("member's sex=          " + m[i].getSex());
+                    System.out.println("member's phone number= " + m[i].getPhoneNumber());
+                    System.out.println("---------------------------------------------------");
+                    c+=1;                  
+                }               
             }
-            //else
-        }
-        if(c>0){
-            try{
-            System.out.println("which one do you mean? Enter the number: ");
-            int num = sc.nextInt();
-            if(num<=c){
-                for (int i = 0; i < m.length - 1; i++) {
-                    if (i == num - 1) {
-                        System.out.println("* member number " + (num) + " *");
-                        System.out.println("member's id=           " + m[num-1].getid());
-                        System.out.println("member's name=         " + m[num-1].getName());
-                        System.out.println("member's age=          " + m[num-1].getAge());
-                        System.out.println("member's sex=          " + m[num-1].getSex());
-                        System.out.println("member's phone number= " + m[num-1].getPhoneNumber());
-                    }
-                }
-        }else{System.out.println("invalid choise");}
-    }
-    catch(Exception e){
-        System.out.println("enter number correctly!!");
-        sc.next();
-    }
-    }else{ System.out.println("nothing found!!");}
-    }
-
-
-    //showing member's info by getting the member array
-    public static void showInfMem(Member[] members) {
-        for (int i = 0; i < counter; i++) {
-            if (members[i] != null) {
-                System.out.println("* member number " + (i + 1) + " *");
-                System.out.println("member's id=           " + members[i].getid());
-                System.out.println("member's name=         " + members[i].getName());
-                System.out.println("member's age=          " + members[i].getAge());
-                System.out.println("member's sex=          " + members[i].getSex());
-                System.out.println("member's phone number= " + members[i].getPhoneNumber());
-                System.out.println("--------------------------------------------");
+            
+            if(c>0){            
+                System.out.println("which one do you mean? Enter the number: ");
+                int num = sc.nextInt();
+                              
+                    if(m[num-1] !=null && num>=1){
+                            System.out.println("* member number " + (num) + " *");
+                            System.out.println("member's id=           " + m[num-1].getid());
+                            System.out.println("member's name=         " + m[num-1].getName());
+                            System.out.println("member's age=          " + m[num-1].getAge());
+                            System.out.println("member's sex=          " + m[num-1].getSex());
+                            System.out.println("member's phone number= " + m[num-1].getPhoneNumber());
+                    }else{System.out.println("invalid choise");}
             }
+            else{System.out.println("no member found");}
         }
+        catch(InputMismatchException e){
+            System.out.println("enter number correctly!!");
+            sc.next();
+        }  
+            
     }
-    //lend books to members
+    /**lend books to members*/
     public boolean borrow(Book b) {
-        for (int i = 0; i < 5; i++) {
-                if (this.borrowed[i] == null) {
-                    borrowed[i] = b;
-                    return true;
-                }
+        try{
+            for (int i = 0; i < 5; i++) {                
+                borrowed[i] = b;
+                return true;                
+            }
+        }
+        catch(NullPointerException e){
+            //do nothing
         }
         return false;
     }
 
-    //show each member's borrowed book
+    /**show each member's borrowed book*/
     public static void showMemBorrow(Member m) {
         for (int i = 0; i < 5; i++) {
             if (m.borrowed[i] != null) {
@@ -266,7 +256,7 @@ public class Member {
             else{System.out.println("null");}
         }
     }
-    //remove a book from member;s borrowed list
+    /** remove a book from member;s borrowed list */
     public boolean remBorrow(Book b) {
         for (int i = 0; i < 5; i++) {
             if (this.borrowed[i] == b) {
@@ -277,7 +267,7 @@ public class Member {
         }
         return false;
     }
-    //sorting elements in array
+    /**sorting elements in array */
     public void sortArr(Book [] borrowed){
         for(int i=0;i<4;i++){
             if(borrowed[i]==null) {
